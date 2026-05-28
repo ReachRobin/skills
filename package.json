@@ -1,0 +1,17 @@
+{
+  "name": "@reachrobin/skills-monorepo",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Open-source GTM playbook as skills",
+  "license": "MIT",
+  "scripts": {
+    "build": "pnpm -F @reachrobin/cli run build",
+    "validate": "pnpm -F @reachrobin/cli run validate",
+    "publish-mcps": "pnpm -F @reachrobin/cli run publish-mcps",
+    "test": "pnpm -r test",
+    "site:dev": "pnpm -F @reachrobin/site dev",
+    "site:build": "pnpm -F @reachrobin/site build"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": { "node": ">=20" }
+}

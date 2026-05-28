@@ -9,6 +9,7 @@
     "validate": "pnpm -F @reachrobin/cli run validate",
     "publish-mcps": "pnpm -F @reachrobin/cli run publish-mcps",
     "test": "pnpm -r test",
+    "typecheck": "pnpm -r --if-present typecheck",
     "site:dev": "pnpm -F @reachrobin/site dev",
     "site:build": "pnpm -F @reachrobin/site build"
   },

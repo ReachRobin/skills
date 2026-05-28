@@ -8,7 +8,8 @@
     "build": "tsx src/build.ts",
     "validate": "tsx src/validate.ts",
     "publish-mcps": "tsx src/publish-mcps.ts",
-    "test": "vitest run"
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "zod": "^3.23.0",

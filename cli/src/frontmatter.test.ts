@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { parseFrontmatter, frontmatterSchema } from './frontmatter'
+import { parseFrontmatter } from './frontmatter.js'
 
 describe('parseFrontmatter', () => {
   it('parses valid core skill frontmatter', () => {

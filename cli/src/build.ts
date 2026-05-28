@@ -18,8 +18,8 @@ async function main() {
 
   const skillFiles = await globby(['../skills/{core,lab}/*/SKILL.md'])
   if (skillFiles.length === 0) {
-    console.error('No skills found.')
-    process.exit(1)
+    console.log('No skills to build yet.')
+    return
   }
 
   const coreSkills: Array<{ slug: string; description: string }> = []

@@ -1,0 +1,24 @@
+{
+  "name": "@reachrobin/cli",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "src/build.ts",
+  "scripts": {
+    "build": "tsx src/build.ts",
+    "validate": "tsx src/validate.ts",
+    "publish-mcps": "tsx src/publish-mcps.ts",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "zod": "^3.23.0",
+    "gray-matter": "^4.0.3",
+    "globby": "^14.0.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.5.0",
+    "@types/node": "^20.11.0"
+  }
+}

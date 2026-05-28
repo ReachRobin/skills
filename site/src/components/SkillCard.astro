@@ -1,0 +1,74 @@
+---
+interface Props {
+  slug: string
+  name: string
+  description: string
+  category: string
+  tier: string
+  maintainer: string
+}
+
+const { slug, name, description, category, tier, maintainer } = Astro.props
+
+const href = tier === 'lab' ? `/lab/${slug}` : `/${slug}`
+const truncated = description.length > 150 ? description.slice(0, 147) + '...' : description
+---
+
+<a href={href} class="card">
+  <div class="card-header">
+    <span class="card-title">{name}</span>
+    <span class="badge badge-category">{category}</span>
+  </div>
+  <p class="card-desc">{truncated}</p>
+  <span class="card-maintainer">@{maintainer}</span>
+</a>
+
+<style>
+  .card {
+    display: block;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+  .card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-color: #d1d5db;
+  }
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .card-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #111827;
+  }
+  .badge {
+    font-size: 0.7rem;
+    font-weight: 500;
+    padding: 0.15rem 0.5rem;
+    border-radius: 9999px;
+    text-transform: capitalize;
+  }
+  .badge-category {
+    background: #f3f4f6;
+    color: #6b7280;
+    border: 1px solid #e5e7eb;
+  }
+  .card-desc {
+    font-size: 0.85rem;
+    color: #4b5563;
+    line-height: 1.5;
+    margin: 0 0 0.75rem;
+  }
+  .card-maintainer {
+    font-size: 0.75rem;
+    color: #9ca3af;
+  }
+</style>

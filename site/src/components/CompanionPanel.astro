@@ -1,0 +1,50 @@
+---
+interface Props {
+  rrCompanion: 'optional' | 'required'
+}
+
+const { rrCompanion } = Astro.props
+---
+
+<div class={`companion-panel companion-${rrCompanion}`}>
+  {rrCompanion === 'optional' ? (
+    <p>
+      This skill works standalone. Connect ReachRobin to give it access to your actual
+      campaigns and prospect data - the experience gets noticeably smoother. Free RR account
+      works. <a href="https://reachrobin.com/docs/mcp">Connect RR</a>.
+    </p>
+  ) : (
+    <p>
+      This skill requires a ReachRobin account. It calls our MCP to fetch live data.
+      Free RR account works for read-only access.{' '}
+      <a href="https://reachrobin.com/?utm_source=skills">Get an RR account</a>.
+    </p>
+  )}
+</div>
+
+<style>
+  .companion-panel {
+    border-left: 3px solid #93c5fd;
+    background: #eff6ff;
+    border-radius: 0 6px 6px 0;
+    padding: 0.75rem 1rem;
+    margin: 1.5rem 0;
+  }
+  .companion-required {
+    border-left-color: #f9a8d4;
+    background: #fff1f2;
+  }
+  .companion-panel p {
+    font-size: 0.875rem;
+    color: #374151;
+    margin: 0;
+    line-height: 1.6;
+  }
+  .companion-panel a {
+    color: #1d4ed8;
+    text-decoration: none;
+  }
+  .companion-panel a:hover {
+    text-decoration: underline;
+  }
+</style>

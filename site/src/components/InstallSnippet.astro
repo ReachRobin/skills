@@ -1,0 +1,92 @@
+---
+interface Props {
+  pluginName: string
+  slug: string
+}
+
+const { pluginName, slug } = Astro.props
+
+const ccCommands = `/plugin marketplace add ReachRobin/skills\n/plugin install ${pluginName}`
+const promptPackUrl = `https://reachrobin.com/dist/prompt-pack/${slug}.md`
+const mcpJson = `{
+  "mcpServers": {
+    "rr": {
+      "transport": "http",
+      "url": "https://mcp.reachrobin.com/api/mcp",
+      "headers": { "Authorization": "Bearer YOUR_TOKEN" }
+    }
+  }
+}`
+---
+
+<div class="install-snippet">
+  <section class="install-section">
+    <h4>Claude Code</h4>
+    <pre><code>{ccCommands}</code></pre>
+  </section>
+
+  <section class="install-section">
+    <h4>Prompt-pack (ChatGPT / Cursor / Claude.ai)</h4>
+    <p class="install-note">Copy the skill file and paste it into any LLM tool as a system prompt or custom instruction.</p>
+    <a href={promptPackUrl} class="download-link" download>Download {slug}.md</a>
+  </section>
+
+  <section class="install-section">
+    <h4>MCP config (other clients)</h4>
+    <pre><code>{mcpJson}</code></pre>
+    <p class="install-note">
+      Get your token at <a href="https://reachrobin.com/dashboard/settings/mcp-tokens">reachrobin.com/dashboard/settings/mcp-tokens</a>.
+    </p>
+  </section>
+</div>
+
+<style>
+  .install-snippet {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .install-section h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #374151;
+    margin: 0 0 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  pre {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    overflow-x: auto;
+    margin: 0;
+  }
+  pre code {
+    font-family: ui-monospace, 'Cascadia Code', Menlo, monospace;
+    font-size: 0.82rem;
+    color: #1f2937;
+    white-space: pre;
+  }
+  .install-note {
+    font-size: 0.82rem;
+    color: #6b7280;
+    margin: 0.5rem 0 0;
+  }
+  .install-note a,
+  .download-link {
+    color: #2563eb;
+    text-decoration: none;
+  }
+  .install-note a:hover,
+  .download-link:hover {
+    text-decoration: underline;
+  }
+  .download-link {
+    display: inline-block;
+    margin-top: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+</style>

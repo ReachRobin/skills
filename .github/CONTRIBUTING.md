@@ -50,10 +50,6 @@ Two paths depending on tier:
 2. Wait for a maintainer to respond with feedback or green-light.
 3. Once approved, follow the lab flow above but create under `skills/core/` instead.
 
-## DCO Sign-off
-
-Every commit must be signed off. Use `git commit -s` or add `-s` to your existing workflow. The DCO GitHub Action on pull requests enforces this. It takes 5 seconds per commit.
-
 ## Local Development
 
 - `pnpm install` — install dependencies

@@ -10,7 +10,7 @@
     "typecheck": "astro check"
   },
   "dependencies": {
-    "astro": "^4.5.0",
+    "astro": "^5.18.2",
     "marked": "^12.0.0"
   },
   "devDependencies": {

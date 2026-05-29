@@ -1,0 +1,42 @@
+{
+  "name": "reachrobin-skills",
+  "owner": {
+    "name": "ReachRobin"
+  },
+  "metadata": {
+    "description": "Open-source GTM playbook as skills",
+    "version": "0.0.1"
+  },
+  "plugins": [
+    {
+      "name": "reachrobin",
+      "description": "Open-source GTM playbook (core)",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/core/audience-builder",
+        "./skills/core/gtm-motion-picker",
+        "./skills/core/icebreaker",
+        "./skills/core/icp-definer",
+        "./skills/core/offer-clarifier",
+        "./skills/core/positioning-canvas",
+        "./skills/core/pricing-teardown",
+        "./skills/core/prospect-twin",
+        "./skills/core/sequence-architect",
+        "./skills/core/sequence-doctor",
+        "./skills/core/trigger-event-finder"
+      ]
+    },
+    {
+      "name": "reachrobin-lab",
+      "description": "Experiments and one-offs",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/lab/cringe-translator",
+        "./skills/lab/jargon-bingo",
+        "./skills/lab/title-roaster"
+      ]
+    }
+  ]
+}

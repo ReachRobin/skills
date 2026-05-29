@@ -1,5 +1,5 @@
 import type { Frontmatter } from './frontmatter.js'
-import type { RenderedFile } from './render-cc-plugin.js'
+import type { RenderedFile } from './types.js'
 
 export function renderPromptPack(args: {
   slug: string

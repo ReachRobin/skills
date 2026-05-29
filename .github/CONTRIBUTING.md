@@ -4,7 +4,7 @@ Welcome! This project is a collection of AI skills for Go-To-Market professional
 
 ## Skill Anatomy
 
-Every skill is a markdown file with YAML frontmatter. Start from `skills/_template/SKILL.md` as your template. A skill defines:
+Every skill is a markdown file with YAML frontmatter. Start from `templates/skill/SKILL.md` as your template. A skill defines:
 
 - **Frontmatter** — metadata fields that the build system reads:
   - `name` — skill slug, must match the directory name
@@ -39,7 +39,7 @@ Two paths depending on tier:
 
 ### Lab skill (direct PR)
 1. Create a directory under `skills/lab/` named after your skill (lowercase, kebab-case).
-2. Copy `skills/_template/SKILL.md` into the directory as `SKILL.md`.
+2. Copy `templates/skill/SKILL.md` into the directory as `SKILL.md`.
 3. Fill in frontmatter and body.
 4. Create `examples/` subdirectory with `before-after.md` showing a minimal input-output pair.
 5. Run `pnpm validate` and `pnpm build` locally to verify (no build errors, outputs look reasonable).

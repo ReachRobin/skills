@@ -2,7 +2,7 @@ import { globby } from 'globby'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { parseFrontmatter } from './frontmatter.js'
-import { renderCcPlugin, renderMarketplaceJson } from './render-cc-plugin.js'
+import { renderMarketplaceManifest } from './render-marketplace.js'
 import { renderPromptPack } from './render-prompt-pack.js'
 import { renderSitePage } from './render-site-page.js'
 
@@ -22,20 +22,20 @@ async function main() {
     return
   }
 
-  const coreSkills: Array<{ slug: string; description: string }> = []
-  const labSkills: Array<{ slug: string; description: string }> = []
+  const coreSkills: Array<{ slug: string; description: string; skillPath: string }> = []
+  const labSkills: Array<{ slug: string; description: string; skillPath: string }> = []
 
   for (const file of skillFiles) {
     const md = await fs.readFile(file, 'utf8')
     const slug = path.basename(path.dirname(file))
     const { frontmatter, body } = parseFrontmatter(md)
 
-    const targetGroup = frontmatter.tier === 'core' ? coreSkills : labSkills
-    targetGroup.push({ slug, description: frontmatter.description })
+    // Path to the source skill dir, relative to the repo root (where the
+    // marketplace.json lives and `source: "./"` resolves from).
+    const skillPath = './' + path.relative('..', path.dirname(file)).split(path.sep).join('/')
 
-    const pluginDir = frontmatter.tier === 'core' ? 'cc-plugin' : 'cc-plugin-lab'
-    const cc = renderCcPlugin({ slug, frontmatter, body })
-    await writeFile(path.join(DIST, pluginDir, cc.path), cc.contents)
+    const targetGroup = frontmatter.tier === 'core' ? coreSkills : labSkills
+    targetGroup.push({ slug, description: frontmatter.description, skillPath })
 
     const pp = renderPromptPack({ slug, frontmatter, body })
     await writeFile(path.join(DIST, 'prompt-pack', pp.path), pp.contents)
@@ -44,21 +44,29 @@ async function main() {
     await writeFile(path.join(DIST, 'site-data', sp.path), sp.contents)
   }
 
-  const coreManifest = renderMarketplaceJson({
-    pluginName: 'reachrobin',
-    description: 'Open-source GTM playbook (core)',
-    skills: coreSkills,
+  const manifest = renderMarketplaceManifest({
+    name: 'reachrobin-skills',
+    description: 'Open-source GTM playbook as skills',
+    owner: { name: 'ReachRobin' },
+    plugins: [
+      {
+        name: 'reachrobin',
+        description: 'Open-source GTM playbook (core)',
+        skillPaths: coreSkills.map((s) => s.skillPath),
+      },
+      ...(labSkills.length > 0
+        ? [
+            {
+              name: 'reachrobin-lab',
+              description: 'Experiments and one-offs',
+              skillPaths: labSkills.map((s) => s.skillPath),
+            },
+          ]
+        : []),
+    ],
   })
-  await writeFile(path.join(DIST, 'cc-plugin', coreManifest.path), coreManifest.contents)
-
-  if (labSkills.length > 0) {
-    const labManifest = renderMarketplaceJson({
-      pluginName: 'reachrobin-lab',
-      description: 'Experiments and one-offs',
-      skills: labSkills,
-    })
-    await writeFile(path.join(DIST, 'cc-plugin-lab', labManifest.path), labManifest.contents)
-  }
+  // Repo root (one level up from cli/), NOT under dist/ - this file is committed.
+  await writeFile(path.join('..', manifest.path), manifest.contents)
 
   console.log(`Built ${coreSkills.length} core + ${labSkills.length} lab skills`)
 }

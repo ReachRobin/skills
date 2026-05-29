@@ -1,0 +1,80 @@
+---
+// Tabbed install box for the homepage. CSS-only (no client JS) via radio inputs.
+// Both commands are repo-level (add the whole collection), so they are the same
+// across every skill - this box is the general "get started" entry point.
+const ccCommands = `/plugin marketplace add ReachRobin/skills\n/plugin install reachrobin`
+const skillsShCommand = `npx skills add ReachRobin/skills`
+---
+
+<div class="install-tabs">
+  <input type="radio" name="install-tab" id="tab-cc" checked />
+  <input type="radio" name="install-tab" id="tab-sh" />
+  <div class="tab-row">
+    <label for="tab-cc" class="tab">Claude Code</label>
+    <label for="tab-sh" class="tab">Skills.sh</label>
+  </div>
+  <div class="panel panel-cc">
+    <pre><code>{ccCommands}</code></pre>
+  </div>
+  <div class="panel panel-sh">
+    <pre><code>{skillsShCommand}</code></pre>
+  </div>
+</div>
+
+<style>
+  .install-tabs {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .install-tabs > input[type='radio'] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .tab-row {
+    display: flex;
+    gap: 0.25rem;
+    padding: 0 0.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    background: #fafafa;
+  }
+  .tab {
+    cursor: pointer;
+    padding: 0.6rem 0.85rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #6b7280;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+  }
+  .tab:hover {
+    color: #374151;
+  }
+  #tab-cc:checked ~ .tab-row label[for='tab-cc'],
+  #tab-sh:checked ~ .tab-row label[for='tab-sh'] {
+    color: #2563eb;
+    border-bottom-color: #2563eb;
+    font-weight: 600;
+  }
+  .panel {
+    display: none;
+  }
+  #tab-cc:checked ~ .panel-cc,
+  #tab-sh:checked ~ .panel-sh {
+    display: block;
+  }
+  pre {
+    background: #f9fafb;
+    padding: 0.85rem 1rem;
+    overflow-x: auto;
+    margin: 0;
+  }
+  pre code {
+    font-family: ui-monospace, 'Cascadia Code', Menlo, monospace;
+    font-size: 0.82rem;
+    color: #1f2937;
+    white-space: pre;
+  }
+</style>

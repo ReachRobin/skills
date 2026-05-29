@@ -7,6 +7,10 @@ import { renderPromptPack } from './render-prompt-pack.js'
 import { renderSitePage } from './render-site-page.js'
 
 const DIST = '../dist'
+// Prompt-pack files must be SERVED by the gallery, so they go into the site's
+// public/ dir (Astro copies it to the site root) rather than dist/, which Astro
+// never serves. Generated, so gitignored; the gallery links them same-origin.
+const SITE_PUBLIC = '../site/public'
 
 async function writeFile(target: string, contents: string) {
   await fs.mkdir(path.dirname(target), { recursive: true })
@@ -15,6 +19,7 @@ async function writeFile(target: string, contents: string) {
 
 async function main() {
   await fs.rm(DIST, { recursive: true, force: true })
+  await fs.rm(path.join(SITE_PUBLIC, 'prompt-pack'), { recursive: true, force: true })
 
   const skillFiles = await globby(['../skills/{core,lab}/*/SKILL.md'])
   if (skillFiles.length === 0) {
@@ -38,7 +43,7 @@ async function main() {
     targetGroup.push({ slug, description: frontmatter.description, skillPath })
 
     const pp = renderPromptPack({ slug, frontmatter, body })
-    await writeFile(path.join(DIST, 'prompt-pack', pp.path), pp.contents)
+    await writeFile(path.join(SITE_PUBLIC, 'prompt-pack', pp.path), pp.contents)
 
     const sp = renderSitePage({ slug, frontmatter, body })
     await writeFile(path.join(DIST, 'site-data', sp.path), sp.contents)

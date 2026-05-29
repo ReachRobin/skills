@@ -34,8 +34,8 @@
       "strict": false,
       "skills": [
         "./skills/lab/cringe-translator",
-        "./skills/lab/title-roaster",
-        "./skills/lab/jargon-bingo"
+        "./skills/lab/jargon-bingo",
+        "./skills/lab/title-roaster"
       ]
     }
   ]

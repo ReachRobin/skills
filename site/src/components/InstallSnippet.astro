@@ -7,7 +7,9 @@ interface Props {
 const { pluginName, slug } = Astro.props
 
 const ccCommands = `/plugin marketplace add ReachRobin/skills\n/plugin install ${pluginName}`
-const promptPackUrl = `https://reachrobin.com/dist/prompt-pack/${slug}.md`
+const skillsShCommand = `npx skills add ReachRobin/skills`
+// Same-origin: prompt-pack files are generated into the gallery's public/ dir.
+const promptPackUrl = `/prompt-pack/${slug}.md`
 const mcpJson = `{
   "mcpServers": {
     "rr": {
@@ -23,6 +25,11 @@ const mcpJson = `{
   <section class="install-section">
     <h4>Claude Code</h4>
     <pre><code>{ccCommands}</code></pre>
+  </section>
+
+  <section class="install-section">
+    <h4>Skills.sh</h4>
+    <pre><code>{skillsShCommand}</code></pre>
   </section>
 
   <section class="install-section">

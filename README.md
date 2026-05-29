@@ -8,7 +8,7 @@ Full documentation: https://skills.reachrobin.com/
 
 ```
 /plugin marketplace add ReachRobin/skills
-/plugin install skills
+/plugin install reachrobin
 ```
 
 ## License

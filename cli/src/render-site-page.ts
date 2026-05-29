@@ -7,7 +7,7 @@ export function renderSitePage(args: {
   body: string
 }): RenderedFile {
   const { slug, frontmatter, body } = args
-  const pluginName = frontmatter.tier === 'core' ? 'skills' : 'skills-lab'
+  const pluginName = frontmatter.tier === 'core' ? 'reachrobin' : 'reachrobin-lab'
   const installSnippet = [
     '/plugin marketplace add ReachRobin/skills',
     `/plugin install ${pluginName}`,

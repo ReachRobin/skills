@@ -45,7 +45,7 @@ async function main() {
   }
 
   const coreManifest = renderMarketplaceJson({
-    pluginName: 'skills',
+    pluginName: 'reachrobin',
     description: 'Open-source GTM playbook (core)',
     skills: coreSkills,
   })
@@ -53,7 +53,7 @@ async function main() {
 
   if (labSkills.length > 0) {
     const labManifest = renderMarketplaceJson({
-      pluginName: 'skills-lab',
+      pluginName: 'reachrobin-lab',
       description: 'Experiments and one-offs',
       skills: labSkills,
     })

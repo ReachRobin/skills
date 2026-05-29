@@ -28,6 +28,6 @@ describe('renderSitePage', () => {
     expect(data.category).toBe('outreach')
     expect(data.rr_companion).toBe('optional')
     expect(data.body).toContain('Body content')
-    expect(data.installSnippet).toContain('/plugin install skills')
+    expect(data.installSnippet).toContain('/plugin install reachrobin')
   })
 })
